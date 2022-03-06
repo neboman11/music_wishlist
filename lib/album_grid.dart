@@ -90,7 +90,8 @@ class _AlbumGridState extends State<AlbumGrid> {
                           artist: snapshot.data![index].artist,
                           album: snapshot.data![index].album,
                           image: Image.network(
-                            coverArtSnapshot.data!,
+                            coverArtSnapshot.data!
+                                .replaceFirst(RegExp(r'http:'), 'https:'),
                             loadingBuilder: (context, child, loadingProgress) {
                               if (loadingProgress == null) {
                                 return child;

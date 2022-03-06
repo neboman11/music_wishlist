@@ -2,9 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:music_wishlist/album_grid.dart';
-import 'package:music_wishlist/album_tile.dart';
 
-import 'want_cd.dart';
 import 'album.dart';
 
 void main() {
