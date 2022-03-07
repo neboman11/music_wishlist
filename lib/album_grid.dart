@@ -23,10 +23,10 @@ class AlbumGrid extends StatefulWidget {
 class _AlbumGridState extends State<AlbumGrid> {
   void _addAlbumToRemoveList(Map<String, String> album) {
     if (album['selected'] == 'true') {
-      widget.addAlbum(Album(album: album['album']!, artist: album['artist']!));
-    } else {
       widget
           .removeAlbum(Album(album: album['album']!, artist: album['artist']!));
+    } else {
+      widget.addAlbum(Album(album: album['album']!, artist: album['artist']!));
     }
   }
 

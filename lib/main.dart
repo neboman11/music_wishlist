@@ -46,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _removeAlbum(Album album) {
     setState(() {
-      _albumsToRemove.remove(album);
+      _albumsToRemove.removeWhere(
+          (e) => e.album == album.album && e.artist == album.artist);
     });
   }
 
