@@ -28,7 +28,7 @@ COPY .metadata analysis_options.yaml pubspec.lock pubspec.yaml ./
 RUN flutter build web
 
 # Container to run application
-FROM nginx:1.29.1-alpine3.22-slim
+FROM nginx:1.29.3-alpine3.22-slim
 
 WORKDIR /usr/share/nginx/html
 COPY --from=build /build/build/web .
