@@ -1,8 +1,10 @@
 # Install Operating system and dependencies
-FROM ubuntu:22.04 as build
+FROM ubuntu:24.04 as build
 
-RUN apt-get update 
-RUN apt-get install -y curl git wget unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback lib32stdc++6 python3
+RUN apt-get update && apt-get upgrade -y
+
+RUN apt-get update
+RUN apt-get install -y curl git wget unzip libgconf-2-4 gdb libstdcc+6 libglu1-mesa fonts-droid-fallback lib32stdcc+6 python3
 RUN apt-get clean
 
 # download Flutter SDK from Flutter Github repo
@@ -24,11 +26,11 @@ COPY assets ./assets
 COPY lib ./lib
 COPY test ./test
 COPY web ./web
-COPY .metadata analysis_options.yaml pubspec.lock pubspec.yaml ./
+COPY .metadata analysis_options.yaml pubspec.lock pubspec.yml ./
 RUN flutter build web
 
 # Container to run application
-FROM nginx:1.29.3-alpine3.22-slim
+FROM nginx:1.29-alpine3.22-slim
 
 WORKDIR /usr/share/nginx/html
 COPY --from=build /build/build/web .
