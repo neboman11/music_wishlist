@@ -1,7 +1,7 @@
 # Install Operating system and dependencies
 FROM ubuntu:22.04 as build
 
-RUN apt-get update
+RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y curl git wget unzip libgconf-2-4 gdb libstdcc+6 libglu1-mesa fonts-droid-fallback lib32stdcc+6 python3
 RUN apt-get clean
 
