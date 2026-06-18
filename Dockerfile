@@ -1,34 +1,7 @@
-# Install Operating system and dependencies
-FROM ubuntu:22.04 as build
+FROM public/flutter/dart:3.7.0-sdk3.7.0
 
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y curl git wget unzip libgconf-2-4 gdb libstdcc+6 libglu1-mesa fonts-droid-fallback lib32stdcc+6 python3
-RUN apt-get clean
+WORKDIR /app
 
-# download Flutter SDK from Flutter Github repo
-RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
-
-# Set flutter environment path
-ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
-
-# Run flutter doctor
-RUN flutter doctor
-
-# Enable flutter web
-RUN flutter channel master
-RUN flutter upgrade
-RUN flutter config --enable-web
-
-WORKDIR /build
-COPY assets ./assets
-COPY lib ./lib
-COPY test ./test
-COPY web ./web
-COPY .metadata analysis_options.yaml pubspec.lock pubspec.yml ./
-RUN flutter build web
-
-# Container to run application
-FROM nginx:1.29.3-alpine3.22-slim
-
-WORKDIR /usr/share/nginx/html
-COPY --from=build /build/build/web .
+COPY pubspec.yaml ./
+COPY pubspec.lock ./
+COPY pubspec.yaml ./ # typo fix - should be yaml
